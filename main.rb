@@ -82,12 +82,12 @@ class MyFile
 
   # arrays of full names initialization
   def initialize_arrays
-    @surnames_f = IO.readlines('surnames_female.dat', chomp: true)
-    @names_f = IO.readlines('names_female.dat', chomp: true)
-    @patronymics_f = IO.readlines('patronymics_female.dat', chomp: true)
-    @surnames_m = IO.readlines('surnames_male.dat', chomp: true)
-    @names_m = IO.readlines('names_male.dat', chomp: true)
-    @patronymics_m = IO.readlines('patronymics_male.dat', chomp: true)
+    @surnames_f = IO.readlines('source/surnames_female.dat', chomp: true)
+    @names_f = IO.readlines('source/names_female.dat', chomp: true)
+    @patronymics_f = IO.readlines('source/patronymics_female.dat', chomp: true)
+    @surnames_m = IO.readlines('source/surnames_male.dat', chomp: true)
+    @names_m = IO.readlines('source/names_male.dat', chomp: true)
+    @patronymics_m = IO.readlines('source/patronymics_male.dat', chomp: true)
   end
 
   def create_record
