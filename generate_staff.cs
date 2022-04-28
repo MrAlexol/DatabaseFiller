@@ -9,29 +9,17 @@ namespace StreetGeneration
         {
             Console.WriteLine("Choose the sex: female or male?");
             string sex = Console.ReadLine();
-            string[] surnames = File.ReadAllLines(@$"surnames_{sex}.dat");
-            string[] names = File.ReadAllLines(@$"common_names_{sex}.dat");
-            string[] patronymics = File.ReadAllLines(@$"patronymics_{sex}.dat");
+            string[] surnames = File.ReadAllLines(@$"source\surnames_{sex}.dat");
+            string[] names = File.ReadAllLines(@$"source\common_names_{sex}.dat");
+            string[] patronymics = File.ReadAllLines(@$"source\patronymics_{sex}.dat");
             string[] information = new string[EmployeeNumber];
-            string[] streets = new string[] { "Ясеневая ул.", "Авангардная ул.", "Тверская ул.", "ул. Земляной Вал", "ул. Петровка", "Театральная пл.",
-                                              "ул. Кузнецкий мост", "Спартаковская ул.", "Каширское ш.", "Сиреневый бул.", "ул. Арбат", "ул. Новый Арбат",
-                                              "Пятницкое ш.", "Митинская ул.", "Балаклавский просп.", "Кировоградская ул.", "Варшавское ш.", "Нахимовский просп.",
-                                              "Новочеремушкинская ул.", "Ломоносовкий просп.", "ул. 10-летия Октября", "ул. Крымский Вал", "Смоленская ул.", "ул. 1905 года",
-                                              "2-я Бауманская ул.", "Рубцовская наб.", "Госпитальная наб.", "Красноказарменная ул.", "Севанская ул.", "ул. Колобашкина",
-                                              "Кантемировская ул.", "Чагинская ул.", "ул. Верхние Поля", "Нагорная ул.", "ул. Капотня", "Ставропольская ул.",
-                                              "Тихая ул.", "ул. Кухмистерова", "Нагатинская наб.", "просп. Лихачёва", "Автозаводская ул.", "ул. Варварка",
-                                              "ул. Ильинка", "Софийская наб.", "Садовническая ул.", "Болотная ул.", "Кремлевская наб.", "ул. Большая Любянка",
-                                              "Мясницкая ул.", "ул. Дурова", "Стрелецкая ул.", "ул. Фонвизина", "Уссурийская ул.", "Алтайская ул.", "Курганская ул.",
-                                              "Щёлковское ш.", "Первомайская ул.", "ул. Золоторжский Вал", "ул. Свободы", "ул. Тюрина", "Шипиловский просп.",
-                                              "ул. Пресненский Вал.", "Октябрьский пер.", "Трифоновская ул.", "Пантелеевская ул.", "Аманьевский пер.", "Сретенский бул.",
-                                              "Пятницкая ул.", "ул. Большая Ордынка", "ул. Малая Ордынка", "ул. Большая Полянка", "Донская ул.", "Домодедовская ул.",
-                                              "Красносельяская ул.", "Скорняжный пер."};
+            string[] streets = File.ReadAllLines(@$"source\streets.dat");
 
-            //Создание объекта для генерации чисел
+            //РЎРѕР·РґР°РЅРёРµ РѕР±СЉРµРєС‚Р° РґР»СЏ РіРµРЅРµСЂР°С†РёРё С‡РёСЃРµР»
             Random rnd = new Random();
 
             // Environment.CurrentDirectory = .\....\StreetGeneration\bin\Debug\net6.0
-            string path = @$"{sex}.txt";
+            string path = @$"{sex}.out";
             FileInfo fileInf = new FileInfo(path);
             if (fileInf.Exists)
                 fileInf.Delete();
@@ -42,8 +30,8 @@ namespace StreetGeneration
                 string patronymic = patronymics[rnd.Next(patronymics.Length)];
 
                 string sexRu;
-                if (sex == "female") sexRu = "Женский";
-                else sexRu = "Мужской";
+                if (sex == "female") sexRu = "Р–РµРЅСЃРєРёР№";
+                else sexRu = "РњСѓР¶СЃРєРѕР№";
 
                 string phoneNumber = "89";
                 for (int j = 0; j < 9; j++)
@@ -58,23 +46,23 @@ namespace StreetGeneration
                 {
                     case < 8:
                         if (sex == "female")
-                            family = "Не замужем";
-                        else family = "Не женат";
+                            family = "РќРµ Р·Р°РјСѓР¶РµРј";
+                        else family = "РќРµ Р¶РµРЅР°С‚";
                         break;
                     case < 15:
                         if (sex == "female")
-                            family = "Замужем";
-                        else family = "Женат";
+                            family = "Р—Р°РјСѓР¶РµРј";
+                        else family = "Р–РµРЅР°С‚";
                         break;
                     case < 20:
                         if (sex == "female")
-                            family = "Разведена";
-                        else family = "Разведен";
+                            family = "Р Р°Р·РІРµРґРµРЅР°";
+                        else family = "Р Р°Р·РІРµРґРµРЅ";
                         break;
                     default:
                         if (sex == "female")
-                            family = "Вдова";
-                        else family = "Вдовец";
+                            family = "Р’РґРѕРІР°";
+                        else family = "Р’РґРѕРІРµС†";
                         break;
                 }
 
