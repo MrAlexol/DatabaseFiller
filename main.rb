@@ -1,8 +1,10 @@
 # File class
 class MyFile
+  attr_accessor :table_name
+
   def initialize(file_name, output_type)
     @file_name = file_name # string
-    # raise StandardError, "File #{@file_name} exists!" if File.exist?(file_name)
+    @table_name = 'My_table'
 
     case output_type # string
     when 'insert'
@@ -41,7 +43,7 @@ class MyFile
 
     f = File.new(@file_name, 'w')
 
-    f.write("INSERT INTO \"my table\"\n\t(\"#{@fields.keys.join('", "')}\")\nVALUES\n") if @output_type == :insert
+    f.write("INSERT INTO \"#{@table_name}\"\n\t(\"#{@fields.keys.join('", "')}\")\nVALUES\n") if @output_type == :insert
 
     number.times do |current_number|
       string = record_to_s(create_record)
@@ -83,8 +85,12 @@ class MyFile
       @cities.sample + ', ' + @streets.sample + ', ' + rand(1..100).to_s
     when 'article'
       # Article name
-      initialize_arrays_articles
-      @articles.inject('') { |acc, elem| acc << elem.sample << ' ' }
+      initialize_arrays_header_constructor('articles')
+      @headers['articles'].inject('') { |acc, elem| acc << elem.sample << ' ' }[0..-2]
+    when 'book'
+      # Book name
+      initialize_arrays_header_constructor('books')
+      @headers['books'].inject('') { |acc, elem| acc << elem.sample << ' ' }[0..-2]
     else
       # handle string to regexp random number generator
       number_sub(field_value)
@@ -113,15 +119,20 @@ class MyFile
     @streets = IO.readlines('source/streets.dat', chomp: true)
   end
 
-  # arrays of addresses initialization
-  def initialize_arrays_articles
-    return if @articles_initialized
+  # arrays of titles initialization
+  def initialize_arrays_header_constructor(input_file)
+    if @headers_initialized
+      return if @headers_initialized[input_file]
 
-    @articles_initialized = true
-    @articles = File.read('source/articles.dat').split("\n").each_with_object([]) do |line, acc|
+      @headers_initialized[input_file] = true
+    else
+      @headers_initialized = { input_file => true }
+      @headers = {}
+    end
+
+    @headers[input_file] = File.read("source/#{input_file}.dat").split("\n").each_with_object([]) do |line, acc|
       array_number = line.gsub(/^\d+\//).first.to_i - 1
       acc << [] if acc[array_number].nil?
-      # p line
       acc[array_number] << line.gsub(/\/.*/).first[1..-1].chomp
     end.to_a
   end
