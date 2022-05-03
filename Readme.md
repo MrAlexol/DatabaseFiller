@@ -20,6 +20,7 @@ Where `field_name` can be any string and `field_type` is one of the following li
 - `fio` will generate full name in Russian
 - `phone_no` will generate Russian cell number
 - `address` will generate location in Russian
+- `article` will generate fake article name. *It can be either funny or rude. Sorry for that*
 - `random a..b` will generate a field with random number from `a` to `b`
 - `%d{x, y}` will be substituted anywhere in string with random number from `x` to `y`
 
@@ -38,9 +39,10 @@ file.add_field('Date of birth', '%d{1, 28}.%d{1, 12}.%d{1750, 1775}')
 file.add_field('Date of death', '%d{1, 28}.%d{1, 12}.%d{1795, 1825}')
 file.add_field('Phone', 'phone_no')
 file.add_field('Address', 'address')
+file.add_field('Favourite article', 'article')
 file.generate(20)
 ```
 Output (In Russian):
 ```
-Козлов Руслан Маркович|16.3.1763|21.8.1820|+7(911)217-64-34|Волгоград, Просторная ул., 24
+Козлов Руслан Маркович|16.3.1763|21.8.1820|+7(911)217-64-34|Волгоград, Просторная ул., 24|Исследование качества обоняния среди подростков, находящихся в малых городах
 ```

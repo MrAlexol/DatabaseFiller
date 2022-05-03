@@ -78,9 +78,13 @@ class MyFile
       '+7' + ['(963)', '(964)', '(965)', '(903)', '(910)', '(911)', '(985)', '(980)', '(983)'].sample +
         rand(100..999).to_s + '-' + rand(10..99).to_s + '-' + rand(10..99).to_s
     when 'address'
-      # Address
+      # Random location
       initialize_arrays_addresses
       @cities.sample + ', ' + @streets.sample + ', ' + rand(1..100).to_s
+    when 'article'
+      # Article name
+      initialize_arrays_articles
+      @articles.inject('') { |acc, elem| acc << elem.sample << ' ' }
     else
       # handle string to regexp random number generator
       number_sub(field_value)
@@ -107,6 +111,19 @@ class MyFile
     @addresses_initialized = true
     @cities = IO.readlines('source/cities.dat', chomp: true)
     @streets = IO.readlines('source/streets.dat', chomp: true)
+  end
+
+  # arrays of addresses initialization
+  def initialize_arrays_articles
+    return if @articles_initialized
+
+    @articles_initialized = true
+    @articles = File.read('source/articles.dat').split("\n").each_with_object([]) do |line, acc|
+      array_number = line.gsub(/^\d+\//).first.to_i - 1
+      acc << [] if acc[array_number].nil?
+      # p line
+      acc[array_number] << line.gsub(/\/.*/).first[1..-1].chomp
+    end.to_a
   end
 
   def create_record
