@@ -12,8 +12,6 @@ class MyFile
     else
       raise StandardError, 'No such output type!'
     end
-
-    initialize_arrays
   end
 
   def add_field(field_name, source)
@@ -51,7 +49,7 @@ class MyFile
                   ','
                 else
                   ';'
-                end
+                end if @output_type == :insert
       f.puts(string)
     end
 
@@ -68,26 +66,47 @@ class MyFile
       rand(arg.next.to_i..arg.next.to_i).to_s
     when 'fio'
       # full name (russian)
+      initialize_arrays_names
       case rand(0..1)
       when 0
         "#{@surnames_f.sample} #{@names_f.sample} #{@patronymics_f.sample}"
       when 1
         "#{@surnames_m.sample} #{@names_m.sample} #{@patronymics_m.sample}"
       end
+    when 'phone_no'
+      # mobile phone number (Russia)
+      '+7' + ['(963)', '(964)', '(965)', '(903)', '(910)', '(911)', '(985)', '(980)', '(983)'].sample +
+        rand(100..999).to_s + '-' + rand(10..99).to_s + '-' + rand(10..99).to_s
+    when 'address'
+      # Address
+      initialize_arrays_addresses
+      @cities.sample + ', ' + @streets.sample + ', ' + rand(1..100).to_s
     else
-      # random number in string field
+      # handle string to regexp random number generator
       number_sub(field_value)
     end
   end
 
   # arrays of full names initialization
-  def initialize_arrays
+  def initialize_arrays_names
+    return if @names_initialized
+
+    @names_initialized = true
     @surnames_f = IO.readlines('source/surnames_female.dat', chomp: true)
     @names_f = IO.readlines('source/names_female.dat', chomp: true)
     @patronymics_f = IO.readlines('source/patronymics_female.dat', chomp: true)
     @surnames_m = IO.readlines('source/surnames_male.dat', chomp: true)
     @names_m = IO.readlines('source/names_male.dat', chomp: true)
     @patronymics_m = IO.readlines('source/patronymics_male.dat', chomp: true)
+  end
+
+  # arrays of addresses initialization
+  def initialize_arrays_addresses
+    return if @addresses_initialized
+
+    @addresses_initialized = true
+    @cities = IO.readlines('source/cities.dat', chomp: true)
+    @streets = IO.readlines('source/streets.dat', chomp: true)
   end
 
   def create_record

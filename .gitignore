@@ -1,5 +1,6 @@
 *.out
 *.tmp
+tmp*.*
 
 # Ignore Mac OS files
 .DS_Store
