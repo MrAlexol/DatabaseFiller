@@ -9,5 +9,7 @@ file.add_field('Телефон', 'phone_no')
 file.add_field('Адрес', 'address')
 file.add_field('Любимая статья', 'article')
 file.add_field('Любимая книга', 'book')
+file.add_field('Любимая научная книга', 'science_book')
+file.add_field('Любимый роман', 'novel_book')
 
 file.generate(20)

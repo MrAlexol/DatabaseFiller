@@ -19,13 +19,15 @@ Then add desired fields using:
 `file.add_field(field_name, field_type)`  
 Where `field_name` can be any string and `field_type` is one of the following list:
 
-- `fio` will generate full name
-- `phone_no` will generate cell number
-- `address` will generate location
-- `article` will generate fake article title.
-- `book` will generate fake book title.
-- `random a..b` will generate a field with random number from `a` to `b`
-- `%d{x, y}` will be substituted anywhere in string with random number from `x` to `y`
+- `fio` will generate full name;
+- `phone_no` will generate cell number;
+- `address` will generate location;
+- `article` will generate fake article title;
+- `book` will generate fake book title;
+- `science_book` will generate fake textbook title;
+- `novel_book` will generate fake novel title;
+- `random a..b` will generate a field with random number from `a` to `b`;
+- `%d{x, y}` will be substituted anywhere in string with random number from `x` to `y`.
 
  *Automatically formed titles can be either funny or rude. Sorry for that.*
 
@@ -46,9 +48,11 @@ file.add_field('Phone', 'phone_no')
 file.add_field('Address', 'address')
 file.add_field('Favourite article', 'article')
 file.add_field('Favourite book', 'book')
+file.add_field('Favourite science book', 'science_book')
+file.add_field('Favourite novel', 'novel_book')
 file.generate(10)
 ```
 Output (In Russian):
 ```
-Козлов Руслан Маркович|16.10.1763|21.12.1820|+7(911)217-64-34|Волгоград, Просторная ул., 24|Исследование качества обоняния среди подростков, находящихся в малых городах|Сказка о странствии Гарри Поттера и Полумны Лавгуд под палящим солнцем
+Козлов Руслан Маркович|16.10.1763|21.12.1820|+7(911)217-64-34|Волгоград, Просторная ул., 24|Исследование качества обоняния среди подростков, находящихся в малых городах|Сказка о странствии Гарри Поттера и Полумны Лавгуд под палящим солнцем|Введение в специальность аналитика данных и основы практической теории игр|Приключения моего друга Андрея на вокзале
 ```

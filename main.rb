@@ -83,14 +83,10 @@ class MyFile
       # Random location
       initialize_arrays_addresses
       @cities.sample + ', ' + @streets.sample + ', ' + rand(1..100).to_s
-    when 'article'
-      # Article name
-      initialize_arrays_header_constructor('articles')
-      @headers['articles'].inject('') { |acc, elem| acc << elem.sample << ' ' }[0..-2]
-    when 'book'
-      # Book name
-      initialize_arrays_header_constructor('books')
-      @headers['books'].inject('') { |acc, elem| acc << elem.sample << ' ' }[0..-2]
+    when 'article', 'book', 'science_book', 'novel_book'
+      # Construct a title (header)
+      initialize_arrays_header_constructor(field_value)
+      @headers[field_value].inject('') { |acc, elem| acc << elem.sample << ' ' }[0..-2]
     else
       # handle string to regexp random number generator
       number_sub(field_value)
@@ -130,7 +126,7 @@ class MyFile
       @headers = {}
     end
 
-    @headers[input_file] = File.read("source/#{input_file}.dat").split("\n").each_with_object([]) do |line, acc|
+    @headers[input_file] = File.read("source/#{input_file}s.dat").split("\n").each_with_object([]) do |line, acc|
       array_number = line.gsub(/^\d+\//).first.to_i - 1
       acc << [] if acc[array_number].nil?
       acc[array_number] << line.gsub(/\/.*/).first[1..-1].chomp
