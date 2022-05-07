@@ -1,6 +1,13 @@
+# Ignore Output files
 *.out
+
+# Ignore temporary files
 *.tmp
 tmp*.*
+
+# Ignore template files
+*.temp
+temp*.*
 
 # Ignore Mac OS files
 .DS_Store
