@@ -4,9 +4,10 @@ namespace StreetGeneration
 {
     class Program
     {
-        const int EmployeeNumber = 200;
         static void Main(string[] args)
         {
+            Console.WriteLine("How many records do you want to generate?");
+            int EmployeeNumber = Int32.Parse(Console.ReadLine());
             Console.WriteLine("Choose the sex: female or male?");
             string sex = Console.ReadLine();
             string[] surnames = File.ReadAllLines(@$"source\surnames_{sex}.dat");
@@ -18,7 +19,7 @@ namespace StreetGeneration
             //Создание объекта для генерации чисел
             Random rnd = new Random();
 
-            // Environment.CurrentDirectory = .\....\StreetGeneration\bin\Debug\net6.0
+            // Environment.CurrentDirectory = .\....\bin\Debug\net6.0
             string path = @$"{sex}.out";
             FileInfo fileInf = new FileInfo(path);
             if (fileInf.Exists)

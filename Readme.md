@@ -57,3 +57,35 @@ Output (In Russian):
 ```
 Козлов Руслан Маркович|16.10.1763|21.12.1820|+7(911)217-64-34|Волгоград, Просторная ул., 24|Исследование качества обоняния среди подростков, находящихся в малых городах|Сказка о странствии Гарри Поттера и Полумны Лавгуд под палящим солнцем|Введение в специальность аналитика данных и основы практической теории игр|Приключения моего друга Андрея на вокзале|10
 ```
+
+## A C# Program
+
+This generator allows to make odd records with fake full name, sex, telephone number, marital status and address.
+
+### How to use
+
+If you want to use *Visual Studio*: 
+1. Create a project;
+2. Paste the `generate_staff.cs` code there;
+3. Move source folder to the following path: `...\bin\Debug\net6.0`;
+4. Run the program.
+
+Then answer the questions in the terminal:
+
+```console
+How many records do you want to generate?
+500
+Choose the sex: female or male?
+male
+```
+You can see the result of generation in the file `.out` located on the path: `...\bin\Debug\net6.0`
+
+### Example
+
+Output (In Russian):
+
+```sql
+('Потапов Георгий Эдуардович', 'Мужской', '89350863497', 'Не женат', 'Домодедовская ул., 159'),
+('Панфилов Максим Эрастович', 'Мужской', '89408900804', 'Не женат', 'Осенняя ул., 82'),
+('Борисов Гавриил Филимонович', 'Мужской', '89534121027', 'Не женат', 'Мадридская площадь, 156'),
+```
